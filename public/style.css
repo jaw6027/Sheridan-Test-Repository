@@ -5,3 +5,5 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 .arrow-icon{display:inline-block;vertical-align:middle;flex-shrink:0}.card-arrow .arrow-icon{width:18px;height:18px}.featured-label .arrow-icon{margin-top:3px}
+
+.dashboard-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.dashboard-actions form{margin:0}.dashboard-actions>button{margin-left:auto}@media(max-width:600px){.dashboard-actions{width:100%}}
