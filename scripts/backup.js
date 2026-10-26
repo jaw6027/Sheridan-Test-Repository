@@ -1,0 +1,12 @@
+import 'dotenv/config';
+import {DatabaseSync,backup} from 'node:sqlite';
+import {mkdirSync,cpSync} from 'node:fs';
+import path from 'node:path';
+const destination=process.argv[2];if(!destination)throw Error('Choose a private backup folder outside the data directory.');
+const source=path.resolve(process.env.DATA_DIR||'data');const target=path.resolve(destination);
+if(target===source||target.startsWith(source+path.sep))throw Error('Backup must be outside the live data folder.');
+mkdirSync(target,{recursive:true,mode:0o700});
+const db=new DatabaseSync(path.join(source,'site.sqlite'));
+await backup(db,path.join(target,'site.sqlite'));db.close();
+cpSync(path.join(source,'uploads'),path.join(target,'uploads'),{recursive:true,errorOnExist:true,force:false});
+console.log('Database and uploads backed up. Keep this folder private.');
